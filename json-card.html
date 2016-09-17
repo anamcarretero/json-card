@@ -1,0 +1,264 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
+<link rel="import" href="../paper-card/paper-card.html">
+
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/device-icons.html">
+<link rel="import" href="../iron-icons/editor-icons.html">
+<link rel="import" href="../paper-fab/paper-fab.html">
+
+<!--
+`json-card`
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="json-card">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-fab {
+                --paper-fab-background: var(--default-primary-color, #ffd539);
+                /*--paper-fab-keyboard-focus-background: #f8b3b5;*/
+                --paper-fab-keyboard-focus-background: #FFA000;
+            --paper-fab: {
+                 display: inline-block;
+                 margin: 0 5px
+             };
+            }
+
+            paper-fab:hover {
+                --paper-fab-keyboard-focus-background: #FFA000;
+            }
+
+            paper-card {
+                margin-bottom: 10px;
+                background-color: #232F3A;
+                color: white;
+            box-sizing: border-box;
+            width: 100%;
+            --paper-card-actions: {
+                 padding: 10px 16px;
+             };
+            --paper-card-content: {
+                 font-family: Roboto;
+                 font-weight: 300;
+                 background-color: #232F3A;
+                 padding: 0 16px 40px 16px;
+                box-sizing: border-box;
+             }
+            }
+
+            paper-card .card-actions {
+                background-color: #232F3A;
+                text-align: right;
+            }
+
+            paper-card .card-header {
+                padding: 16px;
+                font-weight: 400;
+                font-size: 22px;
+                line-height: 58px;
+                color: white;
+                font-family: 'Roboto', 'Noto', sans-serif;
+            }
+
+            paper-card .card-header .card-location {
+                display: inline-block;
+                width: 40%;
+                line-height: 85px;
+                vertical-align: top;
+            }
+
+            paper-card .card-header .card-location iron-icon{
+                display: inline-block;
+                vertical-align: top;
+                height: 41px;
+                width: 41px;
+            }
+
+            paper-card .card-header span {
+                display: inline-block;
+                line-height: 41px;
+                vertical-align: top;
+            }
+
+            paper-card .card-header iron-icon{
+                height: 58px;
+                width: 58px;
+            }
+
+            paper-card .card-header .last-update {
+                display: inline-block;
+                width: 58%;
+                vertical-align: top;
+            }
+
+            paper-card.card-1 .card-header iron-icon {
+                color: #00BCD4;
+            }
+
+            paper-card.card-1 .card-actions {
+                border-top: 2px solid #00BCD4;
+            }
+
+            paper-card.card-1 .card-actions.timing {
+                background-color: #00BCD4;
+                text-align: left;
+            }
+
+            paper-card.card-2 .card-header iron-icon {
+                color: #9C27B0;
+            }
+
+            paper-card.card-2 .card-actions {
+                border-top: 2px solid #9C27B0;
+            }
+
+            paper-card.card-3 .card-header iron-icon {
+                color: #DD7F27;
+            }
+
+            paper-card.card-3 .card-actions {
+                border-top: 2px solid #DD7F27;
+            }
+
+            paper-card.card-4 .card-header iron-icon {
+                color: #FF5252;
+            }
+
+            paper-card.card-4 .card-actions {
+                border-top: 2px solid #FF5252;
+            }
+
+            paper-card.card-5 .card-header iron-icon {
+                color: #8BC34A;
+            }
+
+            paper-card.card-5 .card-actions {
+                border-top: 2px solid #8BC34A;
+            }
+
+            paper-card .card-header .last-update iron-icon {
+                width: 24px;
+                height: 24px;
+                color: white;
+            }
+
+            paper-card .timing-item {
+                text-align: right;
+            }
+
+            paper-card .card-header .last-update .small-text {
+                font-size: 12px;
+                line-height: 1.35em;
+            }
+
+            paper-card .card-header .last-update .medium-text {
+                font-size: 14px;
+                line-height: 1.35em;
+            }
+
+            paper-card .card-header .last-update .large-text {
+                font-size: 36px;
+                line-height: 1.35em;
+            }
+
+        </style>
+        <h2>Hello [[prop1]]</h2>
+
+        <paper-card class="card-5">
+
+            <div class="card-header">
+                <div class="card-location">
+                    <iron-icon icon="device:wifi-tethering"></iron-icon>
+                    <span>Asia</span>
+                </div>
+                <div class="last-update">
+                    <div class="timing-item">
+                        <div class="small-text"><iron-icon icon="device:access-time"></iron-icon> Last update</div>
+
+                    </div>
+                    <div class="timing-item">
+                        <div class="medium-text">October 2, 2016</div>
+                        <span class="large-text">12:05:21</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-actions">
+                <paper-fab mini icon="send"></paper-fab>
+                <paper-fab mini icon="editor:mode-edit" on-tap="manageEditState"></paper-fab>
+            </div>
+
+            <div class="card-content" id="cardContent">
+                <juicy-jsoneditor mode="tree"
+                                  json="{{newYorkJson::jsonchange}}"
+                                  search="false"
+                                  editor>
+                </juicy-jsoneditor>
+            </div>
+
+        </paper-card>
+
+    </template>
+
+    <script>
+
+        var script = document._currentScript || document.currentScript;
+
+        Polymer({
+
+            is: 'json-card',
+
+            properties: {
+                prop1: {
+                    type: String,
+                    value: 'json-card'
+                },
+                newYorkJson: {
+                    type: Object,
+                    value: [{
+                        'array': [1, 2, 3],
+                        'boolean': true,
+                        'null': null,
+                        'number': 123,
+                        'object': {'a': 'b', 'c': 'd'},
+                        'string': 'Hello World'
+                    }]
+                }
+            },
+
+            attached: function() {
+                var url = Polymer.ResolveUrl.resolveUrl("jsoneditor.min.css", script.ownerDocument.baseURI);
+
+                var style = document.createElement("style");
+
+                style.classList.add("juicy-jsoneditor-styles");
+                style.innerHTML = ["@import url('", url, "');"].join("");
+
+                this.$$('juicy-jsoneditor').appendChild(style);
+
+                this.async(function() {
+                    this.$$('juicy-jsoneditor').mode = "view";
+                    this.$$('juicy-jsoneditor').refresh();
+                    this.$$('juicy-jsoneditor').editor.expandAll();
+                });
+            },
+
+            toggle: function() {
+                this.$.actions.toggle();
+            },
+
+            manageEditState: function(event) {
+                event.target.parentElement.parentElement.parentElement.querySelector('juicy-jsoneditor').mode="tree";
+                event.target.parentElement.parentElement.parentElement.querySelector('juicy-jsoneditor').editor.expandAll();
+            }
+
+        });
+    </script>
+</dom-module>
