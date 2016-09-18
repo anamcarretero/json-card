@@ -1,5 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
+<!--<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">-->
+<link rel="import" href="../amcv-json-editor/amcv-json-editor.html">
+
 <link rel="import" href="../paper-card/paper-card.html">
 
 <link rel="import" href="../iron-icons/iron-icons.html">
@@ -22,13 +24,13 @@
             }
 
             paper-fab {
-                --paper-fab-background: var(--default-primary-color, #ffd539);
-                /*--paper-fab-keyboard-focus-background: #f8b3b5;*/
+                --paper-fab-background: var(--main-json-card-color, #ffd539);
+                     /*--paper-fab-keyboard-focus-background: #f8b3b5;*/
                 --paper-fab-keyboard-focus-background: #FFA000;
-            --paper-fab: {
-                 display: inline-block;
-                 margin: 0 5px
-             };
+                --paper-fab: {
+                     display: inline-block;
+                     margin: 0 5px
+                 };
             }
 
             paper-fab:hover {
@@ -39,8 +41,8 @@
                 margin-bottom: 10px;
                 background-color: #232F3A;
                 color: white;
-            box-sizing: border-box;
-            width: 100%;
+                box-sizing: border-box;
+                width: 100%;
             --paper-card-actions: {
                  padding: 10px 16px;
              };
@@ -98,50 +100,58 @@
                 vertical-align: top;
             }
 
-            paper-card.card-1 .card-header iron-icon {
-                color: #00BCD4;
+            paper-card .card-header iron-icon {
+                color: var(--main-json-card-color, #00BCD4);
             }
 
-            paper-card.card-1 .card-actions {
-                border-top: 2px solid #00BCD4;
+            paper-card .card-actions {
+                border-top: 2px solid var(--main-json-card-color, #00BCD4);
             }
 
-            paper-card.card-1 .card-actions.timing {
-                background-color: #00BCD4;
-                text-align: left;
-            }
+            /*paper-card.card-1 .card-header iron-icon {*/
+                /*color: #00BCD4;*/
+            /*}*/
 
-            paper-card.card-2 .card-header iron-icon {
-                color: #9C27B0;
-            }
+            /*paper-card.card-1 .card-actions {*/
+                /*border-top: 2px solid #00BCD4;*/
+            /*}*/
 
-            paper-card.card-2 .card-actions {
-                border-top: 2px solid #9C27B0;
-            }
+            /*paper-card.card-1 .card-actions.timing {*/
+                /*background-color: #00BCD4;*/
+                /*text-align: left;*/
+            /*}*/
 
-            paper-card.card-3 .card-header iron-icon {
-                color: #DD7F27;
-            }
+            /*paper-card.card-2 .card-header iron-icon {*/
+                /*color: #9C27B0;*/
+            /*}*/
 
-            paper-card.card-3 .card-actions {
-                border-top: 2px solid #DD7F27;
-            }
+            /*paper-card.card-2 .card-actions {*/
+                /*border-top: 2px solid #9C27B0;*/
+            /*}*/
 
-            paper-card.card-4 .card-header iron-icon {
-                color: #FF5252;
-            }
+            /*paper-card.card-3 .card-header iron-icon {*/
+                /*color: #DD7F27;*/
+            /*}*/
 
-            paper-card.card-4 .card-actions {
-                border-top: 2px solid #FF5252;
-            }
+            /*paper-card.card-3 .card-actions {*/
+                /*border-top: 2px solid #DD7F27;*/
+            /*}*/
 
-            paper-card.card-5 .card-header iron-icon {
-                color: #8BC34A;
-            }
+            /*paper-card.card-4 .card-header iron-icon {*/
+                /*color: #FF5252;*/
+            /*}*/
 
-            paper-card.card-5 .card-actions {
-                border-top: 2px solid #8BC34A;
-            }
+            /*paper-card.card-4 .card-actions {*/
+                /*border-top: 2px solid #FF5252;*/
+            /*}*/
+
+            /*paper-card.card-5 .card-header iron-icon {*/
+                /*color: #8BC34A;*/
+            /*}*/
+
+            /*paper-card.card-5 .card-actions {*/
+                /*border-top: 2px solid #8BC34A;*/
+            /*}*/
 
             paper-card .card-header .last-update iron-icon {
                 width: 24px;
@@ -176,7 +186,7 @@
             <div class="card-header">
                 <div class="card-location">
                     <iron-icon icon="device:wifi-tethering"></iron-icon>
-                    <span>Asia</span>
+                    <span>[[name]]</span>
                 </div>
                 <div class="last-update">
                     <div class="timing-item">
@@ -191,16 +201,15 @@
             </div>
 
             <div class="card-actions">
-                <paper-fab mini icon="send"></paper-fab>
-                <paper-fab mini icon="editor:mode-edit" on-tap="manageEditState"></paper-fab>
+                <paper-fab mini icon="send" on-tap="save"></paper-fab>
+                <paper-fab id="editionButton" mini icon="editor:mode-edit" on-tap="manageEditState"></paper-fab>
             </div>
 
             <div class="card-content" id="cardContent">
-                <juicy-jsoneditor mode="tree"
-                                  json="{{newYorkJson::jsonchange}}"
+                <amcv-json-editor json="{{json::jsonchange}}"
                                   search="false"
-                                  editor>
-                </juicy-jsoneditor>
+                                  mode="[[mode]]">
+                </amcv-json-editor>
             </div>
 
         </paper-card>
@@ -216,11 +225,7 @@
             is: 'json-card',
 
             properties: {
-                prop1: {
-                    type: String,
-                    value: 'json-card'
-                },
-                newYorkJson: {
+                json: {
                     type: Object,
                     value: [{
                         'array': [1, 2, 3],
@@ -230,23 +235,34 @@
                         'object': {'a': 'b', 'c': 'd'},
                         'string': 'Hello World'
                     }]
+                },
+
+                name: {
+                    type: String,
+                    value: "Asia"
+                },
+
+                mode: {
+                    type: String,
+                    value: "view"
+                },
+
+                date: {
+                    type: Date
+                },
+
+                isActiveEditionMode: {
+                    type: Boolean,
+                    value: false,
+                    observer: "isActiveEditionModeChanged"
                 }
             },
 
             attached: function() {
-                var url = Polymer.ResolveUrl.resolveUrl("jsoneditor.min.css", script.ownerDocument.baseURI);
-
-                var style = document.createElement("style");
-
-                style.classList.add("juicy-jsoneditor-styles");
-                style.innerHTML = ["@import url('", url, "');"].join("");
-
-                this.$$('juicy-jsoneditor').appendChild(style);
-
                 this.async(function() {
-                    this.$$('juicy-jsoneditor').mode = "view";
-                    this.$$('juicy-jsoneditor').refresh();
-                    this.$$('juicy-jsoneditor').editor.expandAll();
+                    this.$$('amcv-json-editor').mode = "view";
+                    this.$$('amcv-json-editor').refresh();
+                    this.$$('amcv-json-editor').editor.expandAll();
                 });
             },
 
@@ -255,8 +271,38 @@
             },
 
             manageEditState: function(event) {
-                event.target.parentElement.parentElement.parentElement.querySelector('juicy-jsoneditor').mode="tree";
-                event.target.parentElement.parentElement.parentElement.querySelector('juicy-jsoneditor').editor.expandAll();
+                if(this.mode === "view") {
+                    this.isActiveEditionMode = true;
+                }
+
+                else {
+                    this.isActiveEditionMode = false;
+                }
+
+            },
+
+            isActiveEditionModeChanged: function() {
+                if(this.isActiveEditionMode === true) {
+                    this.mode = "tree";
+                    this.$.editionButton.icon = "cancel";
+                }
+
+                else {
+                    this.mode = "view"
+                    this.$.editionButton.icon = "editor:mode-edit";
+                }
+
+                if(this.$$('amcv-json-editor').editor !== null) {
+                    this.$$('amcv-json-editor').editor.expandAll();
+                }
+            },
+
+            save: function(event) {
+                console.log('tap save button');
+            },
+
+            isEditable: function() {
+                return this.isActiveEditionMode;
             }
 
         });
