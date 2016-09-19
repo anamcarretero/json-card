@@ -24,13 +24,12 @@
             }
 
             paper-fab {
-                --paper-fab-background: var(--main-json-card-color, #ffd539);
-                     /*--paper-fab-keyboard-focus-background: #f8b3b5;*/
+                --paper-fab-background: var(--json-card-button-color, #ffd539);
                 --paper-fab-keyboard-focus-background: #FFA000;
-                --paper-fab: {
-                     display: inline-block;
-                     margin: 0 5px
-                 };
+            --paper-fab: {
+                 display: inline-block;
+                 margin: 0 5px
+             };
             }
 
             paper-fab:hover {
@@ -43,16 +42,17 @@
                 color: white;
                 box-sizing: border-box;
                 width: 100%;
-            --paper-card-actions: {
-                 padding: 10px 16px;
-             };
-            --paper-card-content: {
-                 font-family: Roboto;
-                 font-weight: 300;
-                 background-color: #232F3A;
-                 padding: 0 16px 40px 16px;
-                box-sizing: border-box;
-             }
+                --paper-card-actions: {
+                     padding: 10px 16px;
+                     border-top: 2px solid var(--main-json-card-color, #00BCD4);
+                 };
+                --paper-card-content: {
+                     font-family: Roboto;
+                     font-weight: 300;
+                     background-color: #232F3A;
+                     padding: 0 16px 40px 16px;
+                     box-sizing: border-box;
+                 };
             }
 
             paper-card .card-actions {
@@ -103,55 +103,6 @@
             paper-card .card-header iron-icon {
                 color: var(--main-json-card-color, #00BCD4);
             }
-
-            paper-card .card-actions {
-                border-top: 2px solid var(--main-json-card-color, #00BCD4);
-            }
-
-            /*paper-card.card-1 .card-header iron-icon {*/
-                /*color: #00BCD4;*/
-            /*}*/
-
-            /*paper-card.card-1 .card-actions {*/
-                /*border-top: 2px solid #00BCD4;*/
-            /*}*/
-
-            /*paper-card.card-1 .card-actions.timing {*/
-                /*background-color: #00BCD4;*/
-                /*text-align: left;*/
-            /*}*/
-
-            /*paper-card.card-2 .card-header iron-icon {*/
-                /*color: #9C27B0;*/
-            /*}*/
-
-            /*paper-card.card-2 .card-actions {*/
-                /*border-top: 2px solid #9C27B0;*/
-            /*}*/
-
-            /*paper-card.card-3 .card-header iron-icon {*/
-                /*color: #DD7F27;*/
-            /*}*/
-
-            /*paper-card.card-3 .card-actions {*/
-                /*border-top: 2px solid #DD7F27;*/
-            /*}*/
-
-            /*paper-card.card-4 .card-header iron-icon {*/
-                /*color: #FF5252;*/
-            /*}*/
-
-            /*paper-card.card-4 .card-actions {*/
-                /*border-top: 2px solid #FF5252;*/
-            /*}*/
-
-            /*paper-card.card-5 .card-header iron-icon {*/
-                /*color: #8BC34A;*/
-            /*}*/
-
-            /*paper-card.card-5 .card-actions {*/
-                /*border-top: 2px solid #8BC34A;*/
-            /*}*/
 
             paper-card .card-header .last-update iron-icon {
                 width: 24px;
