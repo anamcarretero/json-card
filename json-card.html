@@ -26,10 +26,10 @@
             paper-fab {
                 --paper-fab-background: var(--json-card-button-color, #ffd539);
                 --paper-fab-keyboard-focus-background: #FFA000;
-            --paper-fab: {
-                 display: inline-block;
-                 margin: 0 5px
-             };
+                --paper-fab: {
+                     display: inline-block;
+                     margin: 0 5px
+                 };
             }
 
             paper-fab:hover {
@@ -72,7 +72,7 @@
             paper-card .card-header .card-location {
                 display: inline-block;
                 width: 40%;
-                line-height: 85px;
+                line-height: 1.35em;
                 vertical-align: top;
             }
 
@@ -107,11 +107,13 @@
             paper-card .card-header .last-update iron-icon {
                 width: 24px;
                 height: 24px;
+                margin: 0 5px;
                 color: white;
             }
 
             paper-card .timing-item {
                 text-align: right;
+                line-height: initial;
             }
 
             paper-card .card-header .last-update .small-text {
@@ -140,12 +142,13 @@
                 </div>
                 <div class="last-update">
                     <div class="timing-item">
-                        <div class="small-text"><iron-icon icon="device:access-time"></iron-icon> Last update</div>
+                        <div class="small-text"><iron-icon icon="device:access-time"></iron-icon>Latency</div>
 
                     </div>
                     <div class="timing-item">
-                        <div class="medium-text">October 2, 2016</div>
-                        <span class="large-text">12:05:21</span>
+                        <!--<div class="medium-text">October 2, 2016</div>-->
+                        <span class="large-text">[[latency]]</span>
+                        <span class="large-text">ms</span>
                     </div>
                 </div>
             </div>
@@ -205,6 +208,11 @@
                     type: Boolean,
                     value: false,
                     observer: "isActiveEditionModeChanged"
+                },
+
+                latency: {
+                    type: String,
+                    value: ' - '
                 }
             },
 
