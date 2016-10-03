@@ -3,6 +3,7 @@
 <link rel="import" href="../amcv-json-editor/amcv-json-editor.html">
 
 <link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-input/paper-input.html">
 
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-icons/device-icons.html">
@@ -131,6 +132,29 @@
                 line-height: 1.35em;
             }
 
+            paper-input {
+                display: inline-block;
+                width: 47%;
+                --paper-input-container-focus-color: white;
+                --paper-input-container-underline-focus: {
+                    background: var(--json-card-button-color, #ffd539);
+                };
+                --paper-input-container-label: {
+                    text-align: left;
+                };
+            }
+
+            papper-input ::content paper-input-container ::content paper-icon-button {
+                height: 30px;
+                width: 30px ;
+            }
+
+            /*:host {*/
+                /*--paper-input-container-underline-focus {*/
+                    /*background: #FFA000;*/
+                /*};*/
+            /*}*/
+
         </style>
 
         <paper-card class="card-5">
@@ -154,12 +178,24 @@
             </div>
 
             <div class="card-actions">
+                <div class="new-object-item">
+                    <paper-input label="key" id="object-key">
+                        <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
+                        </paper-icon-button>
+                    </paper-input>
+                    :
+                    <paper-input label="value" id="object-value">
+                        <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
+                        </paper-icon-button>
+                    </paper-input>
+
+                </div>
                 <paper-fab mini icon="send" on-tap="save"></paper-fab>
                 <paper-fab id="editionButton" mini icon="editor:mode-edit" on-tap="manageEditState"></paper-fab>
             </div>
 
             <div class="card-content" id="cardContent">
-                <amcv-json-editor json="{{json}}"
+                <amcv-json-editor json="{{json::change}}"
                                   search="false"
                                   mode="[[mode]]">
                 </amcv-json-editor>

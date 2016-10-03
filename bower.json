@@ -6,7 +6,8 @@
     "paper-card": "PolymerElements/paper-card#^1.1.2",
     "paper-fab": "PolymerElements/paper-fab#^1.2.0",
     "iron-icons": "PolymerElements/iron-icons#^1.1.3",
-    "amcv-json-editor": "https://github.com/anamcarretero/amcv-json-editor.git"
+    "amcv-json-editor": "https://github.com/anamcarretero/amcv-json-editor.git",
+    "paper-input": "PolymerElements/paper-input#^1.1.20"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
